@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function getSession() {
-  var id = localStorage.getItem("session_id");
-  if (!id) {
-    id = Date.now() + "" + Math.random().toString(36).substr(2);
-    localStorage.setItem("session_id", id);
-  }
-  return id;
-}
-
 function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +14,7 @@ function Home() {
         setProducts(data.slice(0, 3));
         setLoading(false);
       })
-      .catch(function () {
+      .catch(() => {
         setLoading(false);
       });
   }, []);
@@ -34,7 +25,6 @@ function Home() {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({
-        session_id: getSession(),
         product_id: product.id,
       }),
     }).then(function (res) {
@@ -87,7 +77,7 @@ function Home() {
                         </Link>
                         <button
                           className="btn btn-success btn-sm"
-                          onClick={function () {
+                          onClick={() => {
                             addToCart(product);
                           }}
                         >
@@ -114,7 +104,7 @@ function Home() {
           <div className="col-12 col-md-4 mb-3">
             <div className="card p-4">
               <h4>
-                <i class="fa-solid fa-truck-fast"></i> Fast Delivery
+                <i className="fa-solid fa-truck-fast"></i> Fast Delivery
               </h4>
               <p>We deliver quickly to your door</p>
             </div>
@@ -122,7 +112,7 @@ function Home() {
           <div className="col-12 col-md-4 mb-3">
             <div className="card p-4">
               <h4>
-                <i class="fas fa-star"></i> Good Quality
+                <i className="fas fa-star"></i> Good Quality
               </h4>
               <p>All products are tested and good quality</p>
             </div>
@@ -130,7 +120,7 @@ function Home() {
           <div className="col-12 col-md-4 mb-3">
             <div className="card p-4">
               <h4>
-                <i class="fa-solid fa-phone"></i> Support
+                <i className="fa-solid fa-phone"></i> Support
               </h4>
               <p>We are here to help you anytime</p>
             </div>

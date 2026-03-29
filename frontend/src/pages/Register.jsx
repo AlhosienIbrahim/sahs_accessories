@@ -53,7 +53,7 @@ function Register() {
                                     className="form-control"
                                     placeholder="Choose a username"
                                     value={username}
-                                    onChange={function(e) { setUsername(e.target.value); }}
+                                    onChange={(e) => { setUsername(e.target.value); }}
                                     required
                                 />
                             </div>
@@ -65,7 +65,7 @@ function Register() {
                                     className="form-control"
                                     placeholder="Choose a password"
                                     value={password}
-                                    onChange={function(e) { setPassword(e.target.value); }}
+                                    onChange={(e) => { setPassword(e.target.value); }}
                                     required
                                 />
                             </div>

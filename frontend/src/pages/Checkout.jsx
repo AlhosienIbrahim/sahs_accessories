@@ -32,7 +32,7 @@ function Checkout() {
         setOrderId(data.orderId);
         setOrderDone(true);
       })
-      .catch(function () {
+      .catch(() => {
         setLoading(false);
         alert("Something went wrong! Please try again.");
       });
@@ -52,7 +52,7 @@ function Checkout() {
           </p>
           <button
             className="btn btn-primary mt-3"
-            onClick={function () {
+            onClick={() => {
               navigate("/");
             }}
           >
@@ -127,7 +127,7 @@ function Checkout() {
         <div className="col-12 col-md-6">
           <div className="card p-3">
             <h5>
-              <i class="fa-solid fa-clipboard-list"></i> Order Notes
+              <i className="fa-solid fa-clipboard-list"></i> Order Notes
             </h5>
             <ul>
               <li>We will contact you to confirm</li>

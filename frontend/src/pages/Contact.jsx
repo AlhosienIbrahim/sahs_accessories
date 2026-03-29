@@ -83,21 +83,21 @@ function Contact() {
             <hr />
             <p>
               <strong>
-                <i class="fa-solid fa-location-dot"></i> Address:
+                <i className="fa-solid fa-location-dot"></i> Address:
               </strong>
               <br />
               <span className="text-muted ms-3">Suez, Egypt</span>
             </p>
             <p>
               <strong>
-                <i class="fa-solid fa-phone"></i> Phone:
+                <i className="fa-solid fa-phone"></i> Phone:
               </strong>
               <br />
               <span className="text-muted ms-3">+20 1055 611 680</span>
             </p>
             <p>
               <strong>
-                <i class="fa-solid fa-envelope"></i> Email:
+                <i className="fa-solid fa-envelope"></i> Email:
               </strong>
               <br />
               <span className="text-muted ms-3">
@@ -106,7 +106,7 @@ function Contact() {
             </p>
             <p>
               <strong>
-                <i class="fas fa-clock"></i> Working Hours:
+                <i className="fas fa-clock"></i> Working Hours:
               </strong>
               <br />
               <span className="text-muted ms-3">Mon-Sat: 9am - 6pm</span>

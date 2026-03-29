@@ -14,7 +14,7 @@ function Products() {
             setProducts(data);
             setLoading(false);
         })
-        .catch(function () {
+        .catch(() => {
             setLoading(false);
         });
     }, []);
@@ -75,7 +75,7 @@ function Products() {
                         </Link>
                         <button
                             className="btn btn-success btn-sm"
-                            onClick={function () {
+                            onClick={() => {
                             addToCart(product);
                             }}
                         >

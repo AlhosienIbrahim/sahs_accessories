@@ -44,19 +44,19 @@ function About() {
 
         <div className="col-12 col-md-4">
           <div className="card p-4">
-            <h5><i class="fa-solid fa-circle-info"></i> Our Info</h5>
+            <h5><i className="fa-solid fa-circle-info"></i> Our Info</h5>
             <hr />
             <p>
-              <strong><i class="fas fa-map-marker-alt"></i> Location:</strong> Cairo, Egypt
+              <strong><i className="fas fa-map-marker-alt"></i> Location:</strong> Cairo, Egypt
             </p>
             <p>
-              <strong><i class="fas fa-phone"></i> Phone:</strong> +20 123 456 789
+              <strong><i className="fas fa-phone"></i> Phone:</strong> +20 123 456 789
             </p>
             <p>
-              <strong><i class="fas fa-envelope"></i> Email:</strong> sahs.accessories@email.com
+              <strong><i className="fas fa-envelope"></i> Email:</strong> sahs.accessories@email.com
             </p>
             <p>
-              <strong><i class="fas fa-clock"></i> Working Hours:</strong>
+              <strong><i className="fas fa-clock"></i> Working Hours:</strong>
             </p>
             <p className="text-muted ms-3">Monday - Saturday: 9am - 6pm</p>
             <p className="text-muted ms-3">Sunday: Closed</p>

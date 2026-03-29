@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Cart() {
-  var [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([]);
   function loadCart() {
     fetch("/cart", { credentials: "include" })
       .then(function (res) {
@@ -17,12 +17,12 @@ function Cart() {
       });
   }
 
-  useEffect(function () {
+  useEffect(() => {
     loadCart();
   }, []);
 
   function removeItem(pid) {
-    fetch("/cart/" + pid, { method: "DELETE" }).then(function () {
+    fetch("/cart/" + pid, { method: "DELETE" }).then(() => {
       loadCart();
     });
   }
@@ -32,7 +32,7 @@ function Cart() {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ quantity: qty + 1 }),
-    }).then(function () {
+    }).then(() => {
       loadCart();
     });
   }
@@ -42,22 +42,22 @@ function Cart() {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ quantity: qty - 1 }),
-    }).then(function () {
+    }).then(() => {
       loadCart();
     });
   }
 
   function clearCart() {
     if (window.confirm("Are you sure you want to clear the cart?")) {
-      fetch("/cart", { method: "DELETE" }).then(function () {
+      fetch("/cart", { method: "DELETE" }).then(() => {
         setCart([]);
       });
     }
   }
 
   function getTotal() {
-    var total = 0;
-    for (var i = 0; i < cart.length; i++) {
+    const total = 0;
+    for (const i = 0; i < cart.length; i++) {
       total += cart[i].price * cart[i].quantity;
     }
     return total.toFixed(2);
@@ -66,7 +66,7 @@ function Cart() {
   return (
     <div className="container mt-4">
       <h2>
-        <i class="fa-solid fa-cart-shopping"></i> My Cart
+        <i className="fa-solid fa-cart-shopping"></i> My Cart
       </h2>
       <hr />
 
@@ -93,7 +93,7 @@ function Cart() {
                 </tr>
               </thead>
               <tbody>
-                {cart.map(function (item) {
+                {cart.map((item) => {
                   return (
                     <tr key={item.product_id}>
                       <td>
@@ -112,7 +112,7 @@ function Cart() {
                       <td>
                         <button
                           className="btn btn-sm btn-outline-secondary"
-                          onClick={function () {
+                          onClick={() => {
                             decreaseQty(item.product_id, item.quantity);
                           }}
                         >
@@ -121,7 +121,7 @@ function Cart() {
                         <span className="mx-2 fw-bold">{item.quantity}</span>
                         <button
                           className="btn btn-sm btn-outline-secondary"
-                          onClick={function () {
+                          onClick={() => {
                             increaseQty(item.product_id, item.quantity);
                           }}
                         >
@@ -134,7 +134,7 @@ function Cart() {
                       <td>
                         <button
                           className="btn btn-danger btn-sm"
-                          onClick={function () {
+                          onClick={() => {
                             removeItem(item.product_id);
                           }}
                         >

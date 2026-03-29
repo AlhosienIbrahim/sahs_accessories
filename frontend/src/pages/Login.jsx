@@ -33,7 +33,7 @@ function Login() {
             navigate("/");
             window.location.reload();
         })
-        .catch(function () {
+        .catch(() => {
             setLoading(false);
             setError("Something went wrong. Try again.");
         });

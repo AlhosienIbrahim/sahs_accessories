@@ -66,8 +66,8 @@ app.get('/products/:id', function(req, res) {
 });
 
 app.get('/cart', requireLogin, function(req, res) {
-    var userId = req.session.userId;
-    var sql = `
+    const userId = req.session.userId;
+    const sql = `
         SELECT cart.id, cart.product_id, cart.quantity,
         products.name, products.price, products.image
         FROM cart
@@ -84,8 +84,8 @@ app.get('/cart', requireLogin, function(req, res) {
 });
 
 app.post('/cart', requireLogin, function(req, res) {
-    var userId = req.session.userId;
-    var pid = req.body.product_id;
+    const userId = req.session.userId;
+    const pid = req.body.product_id;
 
     db.query(
         'SELECT * FROM cart WHERE user_id = ? AND product_id = ?',
@@ -125,8 +125,8 @@ app.post('/cart', requireLogin, function(req, res) {
 });
 
 app.put('/cart/:pid', requireLogin, function(req, res) {
-    var userId = req.session.userId;
-    var qty = req.body.quantity;
+    const userId = req.session.userId;
+    const qty = req.body.quantity;
 
     if (qty <= 0) {
         db.query(
@@ -156,7 +156,7 @@ app.put('/cart/:pid', requireLogin, function(req, res) {
 });
 
 app.delete('/cart/:pid', requireLogin, function(req, res) {
-    var userId = req.session.userId;
+    const userId = req.session.userId;
     db.query(
         'DELETE FROM cart WHERE user_id = ? AND product_id = ?',
         [userId, req.params.pid],
@@ -171,7 +171,7 @@ app.delete('/cart/:pid', requireLogin, function(req, res) {
 });
 
 app.delete('/cart', requireLogin, function(req, res) {
-    var userId = req.session.userId;
+    const userId = req.session.userId;
     db.query('DELETE FROM cart WHERE user_id = ?', [userId], function(err) {
         if (err) {
             res.status(500).json({ error: 'database error' });
@@ -182,10 +182,10 @@ app.delete('/cart', requireLogin, function(req, res) {
 });
 
 app.post('/order', requireLogin, function(req, res) {
-    var userId = req.session.userId;
-    var name = req.body.name;
-    var phone = req.body.phone;
-    var address = req.body.address;
+    const userId = req.session.userId;
+    const name = req.body.name;
+    const phone = req.body.phone;
+    const address = req.body.address;
 
     if (!name || !phone || !address) {
         res.status(400).json({ error: 'please fill all fields' });
@@ -209,8 +209,8 @@ app.post('/order', requireLogin, function(req, res) {
 
 
 app.post('/register', async function(req, res) {
-    var username = req.body.username;
-    var password = req.body.password;
+    const username = req.body.username;
+    const password = req.body.password;
 
     if (!username || !password) {
         res.status(400).json({ error: 'please fill all fields' });
@@ -248,8 +248,8 @@ app.post('/register', async function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-    var username = req.body.username;
-    var password = req.body.password;
+    const username = req.body.username;
+    const password = req.body.password;
 
     if (!username || !password) {
         res.status(400).json({ error: 'please fill all fields' });

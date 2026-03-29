@@ -15,7 +15,7 @@ function ProductDetails() {
         setProduct(data);
         setLoading(false);
       })
-      .catch(function () {
+      .catch(() => {
         setLoading(false);
       });
   }, [id]);
@@ -81,7 +81,7 @@ function ProductDetails() {
 
           <div className="d-flex flex-wrap gap-2 mt-3">
             <button className="btn btn-success btn-lg" onClick={addToCart}>
-              <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+              <i className="fa-solid fa-cart-shopping"></i> Add to Cart
             </button>
             <Link to="/cart" className="btn btn-outline-dark btn-lg">
               View Cart
