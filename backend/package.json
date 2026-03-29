@@ -1,0 +1,17 @@
+{
+  "name": "sahs-accessories-backend",
+  "version": "1.0.0",
+  "description": "backend server for sahs accessories store",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-session": "^1.19.0",
+    "mysql2": "^3.3.3",
+    "nodemon": "^3.1.14"
+  }
+}
