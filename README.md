@@ -12,6 +12,7 @@ Open two terminal in the root folder and run:
 first terminal:
 ```
 cd Backend
+npm install
 npm run start
 ```
 This will start backend
@@ -19,6 +20,7 @@ This will start backend
 second terminal:
 ```
 cd frontend
+npm install
 npm start
 ```
 This wil start frontend
