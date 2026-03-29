@@ -60,4 +60,3 @@ sahs-accessories/
 - Bootstrap 5 (styling)
 - Node.js + Express (backend)
 - MySQL (database)
-- concurrently (to run both together)
