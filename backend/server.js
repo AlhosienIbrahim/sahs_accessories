@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -7,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use(session({
-    secret: 'El@de#azl#sahs_accessories&*S#ec$ret+KEy',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false, httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 15 }
