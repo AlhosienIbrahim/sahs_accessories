@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Cart() {
-  const [cart, setCart] = useState([]);
+  let [cart, setCart] = useState([]);
   function loadCart() {
     fetch("/cart", { credentials: "include" })
       .then(function (res) {
@@ -56,8 +56,8 @@ function Cart() {
   }
 
   function getTotal() {
-    const total = 0;
-    for (const i = 0; i < cart.length; i++) {
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
       total += cart[i].price * cart[i].quantity;
     }
     return total.toFixed(2);
