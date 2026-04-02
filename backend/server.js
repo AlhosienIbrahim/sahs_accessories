@@ -26,7 +26,7 @@ const db = mysql.createConnection({
     database: process.env.DB
 });
 
-db.connect(function(err) {
+db.connect((err) => {
     if (err) {
         console.log('database connection failed:', err);
         return;
@@ -43,8 +43,8 @@ function requireLogin(req, res, next) {
     next();
 }
 
-app.get('/products', function(req, res) {
-    db.query('SELECT * FROM products', function(err, results) {
+app.get('/products', (req, res) => {
+    db.query('SELECT * FROM products', (err, results) => {
         if (err) {
             res.status(500).json({ error: 'database error' });
             return;
@@ -53,8 +53,8 @@ app.get('/products', function(req, res) {
     });
 });
 
-app.get('/products/:id', function(req, res) {
-    db.query('SELECT * FROM products WHERE id = ?', [req.params.id], function(err, results) {
+app.get('/products/:id', (req, res) => {
+    db.query('SELECT * FROM products WHERE id = ?', [req.params.id], (err, results) => {
         if (err) {
             res.status(500).json({ error: 'database error' });
             return;
@@ -67,7 +67,7 @@ app.get('/products/:id', function(req, res) {
     });
 });
 
-app.get('/cart', requireLogin, function(req, res) {
+app.get('/cart', requireLogin, (req, res) => {
     const userId = req.session.userId;
     const sql = `
         SELECT cart.id, cart.product_id, cart.quantity,
@@ -76,7 +76,7 @@ app.get('/cart', requireLogin, function(req, res) {
         JOIN products ON cart.product_id = products.id
         WHERE cart.user_id = ?
     `;
-    db.query(sql, [userId], function(err, results) {
+    db.query(sql, [userId], (err, results) => {
         if (err) {
             res.status(500).json({ error: 'database error' });
             return;
@@ -85,14 +85,14 @@ app.get('/cart', requireLogin, function(req, res) {
     });
 });
 
-app.post('/cart', requireLogin, function(req, res) {
+app.post('/cart', requireLogin, (req, res) => {
     const userId = req.session.userId;
     const pid = req.body.product_id;
 
     db.query(
         'SELECT * FROM cart WHERE user_id = ? AND product_id = ?',
         [userId, pid],
-        function(err, results) {
+        (err, results) => {
             if (err) {
                 res.status(500).json({ error: 'database error' });
                 return;
@@ -101,7 +101,7 @@ app.post('/cart', requireLogin, function(req, res) {
                 db.query(
                     'UPDATE cart SET quantity = quantity + 1 WHERE user_id = ? AND product_id = ?',
                     [userId, pid],
-                    function(err) {
+                    (err) => {
                         if (err) {
                             res.status(500).json({ error: 'database error' });
                             return;
@@ -113,7 +113,7 @@ app.post('/cart', requireLogin, function(req, res) {
                 db.query(
                     'INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, 1)',
                     [userId, pid],
-                    function(err) {
+                    (err) => {
                         if (err) {
                             res.status(500).json({ error: 'database error' });
                             return;
@@ -126,7 +126,7 @@ app.post('/cart', requireLogin, function(req, res) {
     );
 });
 
-app.put('/cart/:pid', requireLogin, function(req, res) {
+app.put('/cart/:pid', requireLogin, (req, res) => {
     const userId = req.session.userId;
     const qty = req.body.quantity;
 
@@ -134,7 +134,7 @@ app.put('/cart/:pid', requireLogin, function(req, res) {
         db.query(
             'DELETE FROM cart WHERE user_id = ? AND product_id = ?',
             [userId, req.params.pid],
-            function(err) {
+            (err) => {
                 if (err) {
                     res.status(500).json({ error: 'database error' });
                     return;
@@ -146,7 +146,7 @@ app.put('/cart/:pid', requireLogin, function(req, res) {
         db.query(
             'UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?',
             [qty, userId, req.params.pid],
-            function(err) {
+            (err) => {
                 if (err) {
                     res.status(500).json({ error: 'database error' });
                     return;
@@ -157,12 +157,12 @@ app.put('/cart/:pid', requireLogin, function(req, res) {
     }
 });
 
-app.delete('/cart/:pid', requireLogin, function(req, res) {
+app.delete('/cart/:pid', requireLogin, (req, res) => {
     const userId = req.session.userId;
     db.query(
         'DELETE FROM cart WHERE user_id = ? AND product_id = ?',
         [userId, req.params.pid],
-        function(err) {
+        (err) => {
             if (err) {
                 res.status(500).json({ error: 'database error' });
                 return;
@@ -172,9 +172,9 @@ app.delete('/cart/:pid', requireLogin, function(req, res) {
     );
 });
 
-app.delete('/cart', requireLogin, function(req, res) {
+app.delete('/cart', requireLogin, (req, res) => {
     const userId = req.session.userId;
-    db.query('DELETE FROM cart WHERE user_id = ?', [userId], function(err) {
+    db.query('DELETE FROM cart WHERE user_id = ?', [userId], (err) => {
         if (err) {
             res.status(500).json({ error: 'database error' });
             return;
@@ -183,7 +183,7 @@ app.delete('/cart', requireLogin, function(req, res) {
     });
 });
 
-app.post('/order', requireLogin, function(req, res) {
+app.post('/order', requireLogin, (req, res) => {
     const userId = req.session.userId;
     const name = req.body.name;
     const phone = req.body.phone;
@@ -197,7 +197,7 @@ app.post('/order', requireLogin, function(req, res) {
     db.query(
         'INSERT INTO orders (name, phone, address) VALUES (?, ?, ?)',
         [name, phone, address],
-        function(err, result) {
+        (err, result) => {
             if (err) {
                 res.status(500).json({ error: 'could not save order' });
                 return;
@@ -210,7 +210,7 @@ app.post('/order', requireLogin, function(req, res) {
 });
 
 
-app.post('/register', async function(req, res) {
+app.post('/register', async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -222,7 +222,7 @@ app.post('/register', async function(req, res) {
     try {
         const hashPassword = await bcrypt.hash(password, 10);
 
-        db.query('SELECT * FROM users WHERE username = ?', [username], function(err, results) {
+        db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
             if (err) {
                 res.status(500).json({ error: 'database error' });
                 return;
@@ -235,7 +235,7 @@ app.post('/register', async function(req, res) {
             db.query(
                 'INSERT INTO users (username, password) VALUES (?, ?)',
                 [username, hashPassword],
-                function(err) {
+                (err) => {
                     if (err) {
                         res.status(500).json({ error: 'database error' });
                         return;
@@ -249,7 +249,7 @@ app.post('/register', async function(req, res) {
     }
 });
 
-app.post('/login', function(req, res) {
+app.post('/login', (req, res) =>  {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -258,7 +258,7 @@ app.post('/login', function(req, res) {
         return;
     }
 
-    db.query('SELECT * FROM users WHERE username = ?', [username], async function(err, results) {
+    db.query('SELECT * FROM users WHERE username = ?', [username], async (err, results) => {
         if (err) {
             res.status(500).json({ error: 'database error' });
             return;
@@ -274,14 +274,13 @@ app.post('/login', function(req, res) {
             return;
         }
 
-        // store user id in session
         req.session.userId = results[0].id;
         res.json({ message: 'logged in', username: results[0].username });
     });
 });
 
-app.post('/logout', function(req, res) {
-    req.session.destroy(function(err) {
+app.post('/logout', (req, res) => {
+    req.session.destroy((err) => {
         if (err) {
             res.status(500).json({ error: 'logout failed' });
             return;
@@ -290,6 +289,6 @@ app.post('/logout', function(req, res) {
     });
 });
 
-app.listen(4000, function() {
+app.listen(4000, () => {
     console.log('server running on port 4000');
 });

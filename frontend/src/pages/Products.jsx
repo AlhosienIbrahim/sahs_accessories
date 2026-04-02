@@ -33,7 +33,7 @@ function Products() {
             return;
         }
 
-        alert(product.name, "added to cart!");
+        alert(product.name + " added to cart!");
         });
     }
 
