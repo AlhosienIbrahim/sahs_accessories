@@ -34,7 +34,6 @@ db.connect((err) => {
     console.log('connected to database');
 });
 
-// middleware to check if user is logged in
 function requireLogin(req, res, next) {
     if (!req.session.userId) {
         res.status(401).json({ error: 'you must be logged in' });
